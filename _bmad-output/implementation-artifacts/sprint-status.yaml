@@ -49,15 +49,15 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Early Ship — v0.1 Launch
-  epic-2: backlog
-  2-1-open-source-the-repository-on-github: backlog
-  2-2-submit-extension-to-chrome-web-store-v0-1: backlog
+  epic-2: in-progress
+  2-1-open-source-the-repository-on-github: ready-for-dev
+  2-2-submit-extension-to-chrome-web-store-v0-1: ready-for-dev
   epic-2-retrospective: optional
 
   # Epic 3: Custom Mappings & Popup UI (Power User Customization)
-  epic-3: backlog
-  3-1-render-base-popup-ui-empty-states: backlog
-  3-2-implement-inline-name-editing-storage-persistence: backlog
+  epic-3: in-progress
+  3-1-render-base-popup-ui-empty-states: ready-for-dev
+  3-2-implement-inline-name-editing-storage-persistence: ready-for-dev
   3-3-wire-storage-to-real-time-title-engine: backlog
   3-4-implement-global-pause-resume-toggle: backlog
   epic-3-retrospective: optional
