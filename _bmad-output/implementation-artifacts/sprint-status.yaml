@@ -45,7 +45,7 @@ development_status:
   1-1-scaffold-extension-foundation-with-default-port-labeling: ready-for-dev
   1-2-rewrite-localhost-tab-titles-in-real-time: ready-for-dev
   1-3-prevent-spa-double-rewrites-flicker-guard: ready-for-dev
-  1-4-auto-label-existing-tabs-on-install: backlog
+  1-4-auto-label-existing-tabs-on-install: ready-for-dev
   epic-1-retrospective: optional
 
   # Epic 2: Early Ship — v0.1 Launch
