@@ -1,6 +1,6 @@
 # Story 1.1: Scaffold Extension Foundation with Default Port Labeling
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -18,33 +18,33 @@ So that my localhost tabs are labeled from the first moment the extension is act
 
 ## Tasks / Subtasks
 
-- [ ] Create full project directory structure (AC: 1, 2, 3)
-  - [ ] Create root source files: `manifest.json`, `background.js`, `port-map.js`, `popup.html`, `popup.js`
-  - [ ] Create `icons/` directory with solid-color PNG placeholders at 16×16, 48×48, 128×128
-  - [ ] Create `tests/` directory with empty placeholder test files: `background.test.js`, `port-map.test.js`, `popup.test.js`
-  - [ ] Create `.gitignore` (at minimum exclude: `.DS_Store`, `extension.zip`)
-- [ ] Implement `manifest.json` to spec (AC: 1)
-  - [ ] Set `"manifest_version": 3`
-  - [ ] Set `"name": "Dev Tab Organizer"`, `"version": "0.1.0"`, `"description"`
-  - [ ] Register background service worker: `"background": { "service_worker": "background.js", "type": "module" }`
-  - [ ] Set `"permissions": ["tabs", "scripting", "storage"]` — exactly these three, no others
-  - [ ] Set `"host_permissions": ["http://localhost/*", "http://127.0.0.1/*"]` — no wildcard beyond localhost
-  - [ ] Register popup action with icon paths referencing `icons/` directory
-- [ ] Implement `port-map.js` with correct export and 10+ entries (AC: 2, 3)
-  - [ ] Use exact export form: `export const DEFAULT_PORT_MAP = { ... };`
-  - [ ] All port number keys must be **strings** (e.g., `"3000"`, not `3000`)
-  - [ ] Include at minimum: React (3000), Vite (5173), Angular (4200), Phoenix/Elixir (4000), Django (8000), FastAPI (8000 alt), Flask (5000), Node alternate (3001), Spring Boot (8080), Jupyter (8888), Parcel (1234), Webpack dev (9000)
-  - [ ] Module must be side-effect free — no function calls, no Chrome API access, only the exported const
-  - [ ] Verify that a new entry (e.g., `"4321": "My Service"`) can be added as exactly one line inside the object
-- [ ] Create importable stub files for remaining source files (AC: 1 — extension must load cleanly)
-  - [ ] `background.js`: `import { DEFAULT_PORT_MAP } from './port-map.js';` at top + an empty (no-op) `chrome.tabs.onUpdated.addListener` call so the service worker registers cleanly. No title rewriting logic yet — that is Story 1.2.
-  - [ ] `popup.html`: valid HTML5 shell including `<div id="tab-list"></div>`, `<div id="empty-state"></div>`, and `<script src="popup.js" type="module"></script>`. No inline scripts.
-  - [ ] `popup.js`: `import { DEFAULT_PORT_MAP } from './port-map.js';` at top + empty `init()` async function stub. No logic yet — that is Story 3.1.
-- [ ] Verify extension loads without errors
-  - [ ] Load unpacked in `chrome://extensions` → Load unpacked → select project root
-  - [ ] Confirm no manifest validation errors (red error badge)
-  - [ ] Inspect service worker via Extensions page → Inspect views: service worker → confirm no console errors on startup
-  - [ ] Confirm `DEFAULT_PORT_MAP` is importable without errors (verify via service worker console: `import('./port-map.js').then(m => console.log(m.DEFAULT_PORT_MAP))`)
+- [x] Create full project directory structure (AC: 1, 2, 3)
+  - [x] Create root source files: `manifest.json`, `background.js`, `port-map.js`, `popup.html`, `popup.js`
+  - [x] Create `icons/` directory with solid-color PNG placeholders at 16×16, 48×48, 128×128
+  - [x] Create `tests/` directory with empty placeholder test files: `background.test.js`, `port-map.test.js`, `popup.test.js`
+  - [x] Create `.gitignore` (at minimum exclude: `.DS_Store`, `extension.zip`)
+- [x] Implement `manifest.json` to spec (AC: 1)
+  - [x] Set `"manifest_version": 3`
+  - [x] Set `"name": "Dev Tab Organizer"`, `"version": "0.1.0"`, `"description"`
+  - [x] Register background service worker: `"background": { "service_worker": "background.js", "type": "module" }`
+  - [x] Set `"permissions": ["tabs", "scripting", "storage"]` — exactly these three, no others
+  - [x] Set `"host_permissions": ["http://localhost/*", "http://127.0.0.1/*"]` — no wildcard beyond localhost
+  - [x] Register popup action with icon paths referencing `icons/` directory
+- [x] Implement `port-map.js` with correct export and 10+ entries (AC: 2, 3)
+  - [x] Use exact export form: `export const DEFAULT_PORT_MAP = { ... };`
+  - [x] All port number keys must be **strings** (e.g., `"3000"`, not `3000`)
+  - [x] Include at minimum: React (3000), Vite (5173), Angular (4200), Phoenix/Elixir (4000), Django (8000), FastAPI (8000 alt), Flask (5000), Node alternate (3001), Spring Boot (8080), Jupyter (8888), Parcel (1234), Webpack dev (9000)
+  - [x] Module must be side-effect free — no function calls, no Chrome API access, only the exported const
+  - [x] Verify that a new entry (e.g., `"4321": "My Service"`) can be added as exactly one line inside the object
+- [x] Create importable stub files for remaining source files (AC: 1 — extension must load cleanly)
+  - [x] `background.js`: `import { DEFAULT_PORT_MAP } from './port-map.js';` at top + an empty (no-op) `chrome.tabs.onUpdated.addListener` call so the service worker registers cleanly. No title rewriting logic yet — that is Story 1.2.
+  - [x] `popup.html`: valid HTML5 shell including `<div id="tab-list"></div>`, `<div id="empty-state"></div>`, and `<script src="popup.js" type="module"></script>`. No inline scripts.
+  - [x] `popup.js`: `import { DEFAULT_PORT_MAP } from './port-map.js';` at top + empty `init()` async function stub. No logic yet — that is Story 3.1.
+- [x] Verify extension loads without errors
+  - [x] Load unpacked in `chrome://extensions` → Load unpacked → select project root
+  - [x] Confirm no manifest validation errors (red error badge)
+  - [x] Inspect service worker via Extensions page → Inspect views: service worker → confirm no console errors on startup
+  - [x] Confirm `DEFAULT_PORT_MAP` is importable without errors (verify via service worker console: `import('./port-map.js').then(m => console.log(m.DEFAULT_PORT_MAP))`)
 
 ## Dev Notes
 
@@ -206,7 +206,7 @@ This covers the PRD's stated requirement of 10+ common frameworks. More entries 
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+Antigravity (bmad-dev-story agent)
 
 ### Debug Log References
 
@@ -214,7 +214,11 @@ _None yet_
 
 ### Completion Notes List
 
-_To be filled by dev agent after implementation_
+- Scaffolded extension foundation.
+- Created manifest.json with MV3, permissions, and host_permissions.
+- Created port-map.js with 11 default framework ports.
+- Generated stub files for background.js, popup.js, popup.html and icons.
+- All tasks verified.
 
 ### File List
 
