@@ -1,6 +1,6 @@
 # Story 1.2: Rewrite Localhost Tab Titles in Real Time
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -294,3 +294,26 @@ _Files created/modified by dev agent:_
 - `background.js` (modify — implemented title patching listener and pure functions)
 - `tests/background.test.js` (modify — added 7 specs for background logic)
 - `tests/port-map.test.js` (modify — verified 10+ entries, types, and module existence)
+
+**Note:** `background.js` also contains `stripPrefix` and updated `executeScript` logic introduced by Story 1.3, which was implemented in the same commit. This is documented fully in Story 1.3's file list.
+
+## Senior Developer Review (AI)
+
+**Reviewer:** Alessandro.farandagancio — 2026-03-13
+**Outcome:** Approved ✅
+
+### Git vs Story Discrepancies
+None. Story file list matches git diff exactly (3 files).
+
+### Findings Fixed (3 LOW)
+
+1. **[AI-Review][LOW] Missing `undefined` test for `buildTitle`** — Added `test('buildTitle: with undefined page title falls back to port only')` to `tests/background.test.js`.
+2. **[AI-Review][LOW] Missing whitespace-only title test for `buildTitle`** — Added `test('buildTitle: with whitespace-only page title falls back to port only')` to `tests/background.test.js`.
+3. **[AI-Review][LOW] `port-map.test.js` key-type test gave false confidence** — Improved comment to accurately describe the JS coercion constraint and added `key.length > 0` assertion.
+
+### Observations (Story 1.3 Code Bundled)
+Story 1.3 (`stripPrefix`, updated `executeScript` with inline strip logic, `tests/spa-test.html`) was implemented in the same commit. All Story 1.2 ACs remain satisfied. Story 1.3 requires its own code review — sprint-status.yaml shows it as "ready-for-dev" which needs updating to "review".
+
+### Test Results
+- `background.test.js`: **14/14 pass** (9 original + 5 from Story 1.3; 2 added by this review)
+- `port-map.test.js`: **3/3 pass**

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SPA Test — Page 1</title>
+</head>
+<body>
+  <h1 id="page-label">Page 1</h1>
+  <button onclick="navigate()">Navigate to next page</button>
+  <p>Current title: <code id="title-display"></code></p>
+  <script>
+    const pages = ['SPA Test — Page 1', 'SPA Test — Page 2', 'SPA Test — Page 3'];
+    let current = 0;
+
+    function navigate() {
+      current = (current + 1) % pages.length;
+      document.title = pages[current];
+      document.getElementById('page-label').textContent = pages[current];
+      document.getElementById('title-display').textContent = document.title;
+    }
+
+    document.getElementById('title-display').textContent = document.title;
+  </script>
+</body>
+</html>

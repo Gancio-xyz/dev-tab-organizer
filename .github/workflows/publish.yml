@@ -1,0 +1,44 @@
+name: Publish to Chrome Web Store
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Zip extension
+        run: |
+          zip -r extension.zip . \
+            -x "tests/*" \
+            -x ".github/*" \
+            -x "_bmad/*" \
+            -x "_bmad-output/*" \
+            -x ".cursor/*" \
+            -x ".agent/*" \
+            -x ".claude/*" \
+            -x ".git/*" \
+            -x "*.md" \
+            -x ".gitignore" \
+            -x ".DS_Store" \
+            -x "extension.zip"
+
+      - name: Publish to Chrome Web Store
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: extension.zip
+          extension-id: ${{ secrets.CWS_EXTENSION_ID }}
+          client-id: ${{ secrets.CWS_CLIENT_ID }}
+          client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: extension.zip
+          generate_release_notes: true

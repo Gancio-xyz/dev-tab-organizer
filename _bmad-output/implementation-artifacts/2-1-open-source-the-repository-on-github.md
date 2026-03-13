@@ -1,6 +1,6 @@
 # Story 2.1: Open-Source the Repository on GitHub
 
-Status: ready-for-dev
+Status: in-progress
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -19,22 +19,22 @@ So that the community can discover, install from source, and begin contributing 
 
 ## Tasks / Subtasks
 
-- [ ] Verify the GitHub repository is set to **Public** (AC: 1)
-  - [ ] The remote is already configured: `git@github.com:Gancio-xyz/dev-tab-organizer.git`
-  - [ ] Go to `https://github.com/Gancio-xyz/dev-tab-organizer` → Settings → scroll to "Danger Zone" → confirm visibility is Public (or change it)
-  - [ ] **Do not create a new remote** — origin is already set correctly
-- [ ] Create `LICENSE` file at project root (AC: 1)
-  - [ ] Use standard MIT License text
-  - [ ] Set year to `2026`
-  - [ ] Set copyright holder name (your full name or GitHub username)
+- [x] Verify the GitHub repository is set to **Public** (AC: 1)
+  - [x] The remote is already configured: `git@github.com:Gancio-xyz/dev-tab-organizer.git`
+  - [x] Go to `https://github.com/Gancio-xyz/dev-tab-organizer` → Settings → scroll to "Danger Zone" → confirm visibility is Public (or change it)
+  - [x] **Do not create a new remote** — origin is already set correctly
+- [x] Create `LICENSE` file at project root (AC: 1)
+  - [x] Use standard MIT License text
+  - [x] Set year to `2026`
+  - [x] Set copyright holder name (your full name or GitHub username)
 - [ ] Create `README.md` at project root (AC: 2, 3)
-  - [ ] **Hero headline** — one-line value prop (e.g., "Automatically label your localhost tabs by service name")
-  - [ ] **What it does** — 2–3 sentences explaining the zero-config tab labeling behavior
+  - [x] **Hero headline** — one-line value prop (e.g., "Automatically label your localhost tabs by service name")
+  - [x] **What it does** — 2–3 sentences explaining the zero-config tab labeling behavior
   - [ ] **Screenshot / GIF** section — at minimum one image showing `⚡ PORT — Title` in the Chrome tab bar (see screenshot guidance below)
-  - [ ] **Default port map** — table or list of all entries shipped in `port-map.js`
-  - [ ] **Installation** section — Chrome Web Store install link (placeholder: `[Install from Chrome Web Store](#)`)
-  - [ ] **Load unpacked (dev)** section — exact steps to load from source
-  - [ ] **Add a custom port mapping** — brief note directing users to the popup (coming in v1.0)
+  - [x] **Default port map** — table or list of all entries shipped in `port-map.js`
+  - [x] **Installation** section — Chrome Web Store install link (placeholder: `[Install from Chrome Web Store](#)`)
+  - [x] **Load unpacked (dev)** section — exact steps to load from source
+  - [x] **Add a custom port mapping** — brief note directing users to the popup (coming in v1.0)
 - [ ] Commit `LICENSE` and `README.md` with a meaningful message (AC: 1, 2, 3)
 - [ ] Push all commits to `origin` (AC: 4)
 - [ ] Create and push tag `v0.1.0` (AC: 4)
@@ -201,20 +201,21 @@ Story 2.2 handles Chrome Web Store submission. This story (2.1) only covers the 
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+antigravity
 
 ### Debug Log References
 
-_None yet_
+_None_
 
 ### Completion Notes List
 
-_To be filled by dev agent after implementation_
+- Created `LICENSE` file.
+- Created `README.md` with default port map syncing with `port-map.js`.
+- Halted before commit and push: As instructed in Dev Notes, Epic 1 is not fully `done` yet (story 1-4 is still in review). Therefore, I've left a `<!-- TODO: add screenshot -->` placeholder in the README and am waiting for Epic 1 completion to take the legitimate screenshot and complete the push/tag phase.
 
 ### File List
 
 _Files created/modified by dev agent:_
 
-- `LICENSE` (create)
-- `README.md` (create)
-- `assets/screenshot-tab-bar.png` or `assets/demo.gif` (create — screenshot/GIF of labeled tabs)
+- `LICENSE` (created)
+- `README.md` (created)

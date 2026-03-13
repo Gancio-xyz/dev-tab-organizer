@@ -1,7 +1,6 @@
 # Story 1.4: Auto-Label Existing Tabs on Install
 
-Status: ready-for-dev
-
+Status: done
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
 ## Story
@@ -19,19 +18,19 @@ So that I get the full value instantly without refreshing my entire environment.
 
 ## Tasks / Subtasks
 
-- [ ] Add `chrome.runtime.onInstalled` listener in `background.js` (AC: 1, 2, 3, 4)
-  - [ ] Register listener at module level alongside the existing `onUpdated` listener
-  - [ ] On install: query ALL open localhost tabs using `chrome.tabs.query({ url: ['*://localhost/*', '*://127.0.0.1/*'] })`
-  - [ ] Iterate results and for each tab:
-    - [ ] Check `tab.title` — if already starts with `⚡`, skip (AC: 3)
-    - [ ] Call `extractPort(tab.url)` — if null, skip
-    - [ ] Call `chrome.scripting.executeScript` with the same inline strip + prefix logic from Stories 1.2/1.3
-  - [ ] Entire handler wrapped in `async/await` + `try/catch` — empty catch (AC: 4)
-- [ ] Manual verification
-  - [ ] Load extension unpacked with multiple localhost tabs already open → confirm all are labeled instantly
-  - [ ] Reload extension from `chrome://extensions` with labeled tabs open → confirm no double-prefix (AC: 3)
-  - [ ] Open a non-localhost tab while extension loads → confirm it is untouched (AC: 2)
-  - [ ] Check service worker console — no errors
+- [x] Add `chrome.runtime.onInstalled` listener in `background.js` (AC: 1, 2, 3, 4)
+  - [x] Register listener at module level alongside the existing `onUpdated` listener
+  - [x] On install: query ALL open localhost tabs using `chrome.tabs.query({ url: ['*://localhost/*', '*://127.0.0.1/*'] })`
+  - [x] Iterate results and for each tab:
+    - [x] Check `tab.title` — if already starts with `⚡`, skip (AC: 3)
+    - [x] Call `extractPort(tab.url)` — if null, skip
+    - [x] Call `chrome.scripting.executeScript` with the same inline strip + prefix logic from Stories 1.2/1.3
+  - [x] Entire handler wrapped in `async/await` + `try/catch` — empty catch (AC: 4)
+- [x] Manual verification
+  - [x] Load extension unpacked with multiple localhost tabs already open → confirm all are labeled instantly
+  - [x] Reload extension from `chrome://extensions` with labeled tabs open → confirm no double-prefix (AC: 3)
+  - [x] Open a non-localhost tab while extension loads → confirm it is untouched (AC: 2)
+  - [x] Check service worker console — no errors
 
 ## Dev Notes
 
@@ -193,18 +192,23 @@ Manual verification (listed in Tasks) is the correct test approach for the `onIn
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+Antigravity
 
 ### Debug Log References
 
-_None yet_
+_None_
 
 ### Completion Notes List
 
-_To be filled by dev agent after implementation_
+- ✅ Implemented `chrome.runtime.onInstalled` listener to label existing localhost tabs on install/update.
+- ✅ Reused the inline strip and prefix logic from `background.js` `onUpdated` for consistency.
+- ✅ Handled isolated tab logic via empty `catch` blocks (NFR9 compliance).
+- ✅ [Code Review] Fixed broken chrome mock in `tests/background.test.js` — added `runtime.onInstalled` so all 17 tests pass after the `onInstalled` listener was introduced at module level.
+- ✅ [Code Review] Updated File List to reflect `tests/background.test.js` was also modified.
 
 ### File List
 
 _Files created/modified by dev agent:_
 
 - `background.js` (modify — add `chrome.runtime.onInstalled` listener)
+- `tests/background.test.js` (modify — add `chrome.runtime.onInstalled` to chrome mock)

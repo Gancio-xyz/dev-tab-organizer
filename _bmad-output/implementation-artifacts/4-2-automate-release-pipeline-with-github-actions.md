@@ -1,6 +1,6 @@
 # Story 4.2: Automate Release Pipeline with GitHub Actions
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -19,18 +19,18 @@ So that releasing a new version requires only a `git tag` command — no manual 
 
 ## Tasks / Subtasks
 
-- [ ] Create `.github/workflows/` directory if it does not exist (AC: 4)
-- [ ] Create `.github/workflows/publish.yml` with the exact content specified in Dev Notes (AC: 1, 2, 3)
-  - [ ] Trigger: `on: push: tags: ['v*.*.*']`
-  - [ ] Step 1: `actions/checkout@v4`
-  - [ ] Step 2: Zip command excluding all dev-only paths (see exact exclusion list in Dev Notes)
-  - [ ] Step 3: `mnao305/chrome-extension-upload@v5.0.0` — publish to CWS
-  - [ ] Step 4: `softprops/action-gh-release@v2` — create GitHub Release with zip attached
-- [ ] Manual verification (AC: 1, 2, 3, 4)
-  - [ ] Confirm file exists at `.github/workflows/publish.yml`
-  - [ ] Confirm YAML is valid (no syntax errors) — paste into [yaml.org/start.html](https://yaml.org/start.html) or use `python3 -c "import yaml; yaml.safe_load(open('.github/workflows/publish.yml'))" ` to validate locally
-  - [ ] Confirm the zip exclusion list covers all non-extension files in the project root (check against `ls -la` output)
-  - [ ] Confirm secret names match exactly: `CWS_EXTENSION_ID`, `CWS_CLIENT_ID`, `CWS_CLIENT_SECRET`, `CWS_REFRESH_TOKEN`
+- [x] Create `.github/workflows/` directory if it does not exist (AC: 4)
+- [x] Create `.github/workflows/publish.yml` with the exact content specified in Dev Notes (AC: 1, 2, 3)
+  - [x] Trigger: `on: push: tags: ['v*.*.*']`
+  - [x] Step 1: `actions/checkout@v4`
+  - [x] Step 2: Zip command excluding all dev-only paths (see exact exclusion list in Dev Notes)
+  - [x] Step 3: `mnao305/chrome-extension-upload@v5.0.0` — publish to CWS
+  - [x] Step 4: `softprops/action-gh-release@v2` — create GitHub Release with zip attached
+- [x] Manual verification (AC: 1, 2, 3, 4)
+  - [x] Confirm file exists at `.github/workflows/publish.yml`
+  - [x] Confirm YAML is valid (no syntax errors) — paste into [yaml.org/start.html](https://yaml.org/start.html) or use `python3 -c "import yaml; yaml.safe_load(open('.github/workflows/publish.yml'))" ` to validate locally
+  - [x] Confirm the zip exclusion list covers all non-extension files in the project root (check against `ls -la` output)
+  - [x] Confirm secret names match exactly: `CWS_EXTENSION_ID`, `CWS_CLIENT_ID`, `CWS_CLIENT_SECRET`, `CWS_REFRESH_TOKEN`
 
 ## Dev Notes
 
@@ -227,7 +227,7 @@ This story creates a YAML CI/CD configuration file. There are no automated tests
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+Gemini (Antigravity)
 
 ### Debug Log References
 
@@ -235,7 +235,12 @@ _None_
 
 ### Completion Notes List
 
-_To be filled by dev agent after implementation_
+- Created `.github/workflows/publish.yml` with the exact steps to build and publish the extension pipeline.
+- Added step to zip the extension while excluding dev dependencies like `tests/`, `_bmad/`, `.github/`, etc.
+- Configured publishing to the Chrome Web Store using `mnao305/chrome-extension-upload@v5.0.0` action.
+- Added step to create a GitHub Release with the extension zip using `softprops/action-gh-release@v2`.
+- Validated YAML file syntax locally via Python snippet.
+- Manual verification completed: file exists, syntax valid, exclusion list complete, secrets match exactly.
 
 ### File List
 
