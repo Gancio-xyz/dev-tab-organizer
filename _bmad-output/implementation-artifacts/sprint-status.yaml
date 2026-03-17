@@ -65,6 +65,7 @@ development_status:
   3-5-bug-fix-duplicate-popup-items: done
   3-6-bug-fix-tab-title-prefix-accumulation: done
   3-7-bug-fix-initial-name-resolution: done
+  3-8-improve-popup-menu-with-icons: ready-for-dev
   epic-3-retrospective: optional
 
   # Epic 4: Full Launch — v1.0 Release
