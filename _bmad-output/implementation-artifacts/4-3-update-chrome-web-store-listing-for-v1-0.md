@@ -1,6 +1,6 @@
 # Story 4.3: Update Chrome Web Store Listing for v1.0
 
-Status: ready-for-dev
+Status: in-progress
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

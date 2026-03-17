@@ -7,8 +7,16 @@ let btn = { textContent: '', _attrs: {} };
 btn.setAttribute = (k, v) => { btn._attrs[k] = String(v); };
 btn.addEventListener = () => {};
 
+const tabListEl = { hidden: false, innerHTML: '' };
+const emptyStateEl = { hidden: false, textContent: '' };
+
 globalThis.document = {
-  getElementById: (id) => id === 'toggle-btn' ? btn : { hidden: false, textContent: '' },
+  getElementById: (id) => {
+    if (id === 'toggle-btn') return btn;
+    if (id === 'tab-list') return tabListEl;
+    if (id === 'empty-state') return emptyStateEl;
+    return { hidden: false, textContent: '' };
+  },
   querySelectorAll: () => []
 };
 
@@ -24,7 +32,7 @@ globalThis.chrome = {
   }
 };
 
-const { applyMapping, updateToggleUI } = await import('../extension/popup.js');
+const { applyMapping, updateToggleUI, renderTabList } = await import('../extension/popup.js');
 
 test('applyMapping sets new value for empty mappings', () => {
   const result = applyMapping({}, '3000', 'My App');
@@ -51,4 +59,28 @@ test('updateToggleUI: paused state sets Resume + aria-pressed true', () => {
   updateToggleUI(false);
   assert.equal(btn.textContent, 'Resume');
   assert.equal(btn._attrs['aria-pressed'], 'true');
+});
+
+test('renderTabList: one row per unique port (no duplicates for same port)', () => {
+  tabListEl.innerHTML = '';
+  const twoTabsSamePort = [
+    { url: 'http://localhost:3000/' },
+    { url: 'http://localhost:3000/path' }
+  ];
+  renderTabList(twoTabsSamePort, {}, {});
+  const rows = (tabListEl.innerHTML.match(/class="tab-row"/g) || []);
+  assert.equal(rows.length, 1, 'should render exactly one row when two tabs share the same port');
+  assert.ok(tabListEl.innerHTML.includes('input-3000'), 'row should contain input for port 3000');
+});
+
+test('renderTabList: one row per port across different ports', () => {
+  tabListEl.innerHTML = '';
+  const tabs = [
+    { url: 'http://localhost:3000/' },
+    { url: 'http://localhost:8080/' }
+  ];
+  renderTabList(tabs, {}, {});
+  const rows = (tabListEl.innerHTML.match(/class="tab-row"/g) || []);
+  assert.equal(rows.length, 2, 'should render two rows for two different ports');
+  assert.ok(tabListEl.innerHTML.includes('input-3000') && tabListEl.innerHTML.includes('input-8080'));
 });

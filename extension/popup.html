@@ -10,6 +10,10 @@
   <div id="tab-list" role="list" aria-label="Active localhost tabs" hidden></div>
   <div id="empty-state" aria-live="polite" hidden></div>
   <button id="toggle-btn" type="button" aria-pressed="false">Pause</button>
+  <label for="rewrite-mode-toggle">
+    <input id="rewrite-mode-toggle" type="checkbox" aria-label="Replace page titles entirely (port + name only) instead of prefixing">
+    Replace page titles instead of prefixing
+  </label>
   <script src="popup.js" type="module"></script>
 </body>
 </html>

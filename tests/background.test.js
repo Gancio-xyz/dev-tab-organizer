@@ -17,8 +17,14 @@ globalThis.chrome = {
     ]
   },
   scripting: {
-    executeScript: async ({ args }) => {
-      lastInjectedTitle = args[0];
+    executeScript: async ({ func, args }) => {
+      if (typeof func === 'function' && args && args.length >= 3) {
+        if (!globalThis.document) globalThis.document = { title: '' };
+        func(...args);
+        lastInjectedTitle = globalThis.document.title;
+      } else {
+        lastInjectedTitle = args && args[0];
+      }
     }
   },
   storage: {
@@ -80,6 +86,18 @@ test('stripPrefix: prefixed title returns bare title', () => {
   assert.equal(stripPrefix('⚡ 3000 — My App — Dashboard'), 'My App — Dashboard');
 });
 
+test('stripPrefix: prefix without separator (short title) returns empty string', () => {
+  assert.equal(stripPrefix('⚡ 3000'), '');
+});
+
+test('stripPrefix: doubled prefix returns empty string (no accumulation)', () => {
+  assert.equal(stripPrefix('⚡ 3000 — ⚡ 3000'), '');
+});
+
+test('stripPrefix: multiple prefix runs stripped to bare content', () => {
+  assert.equal(stripPrefix('⚡ 3000 — ⚡ 3000 — Hello'), 'Hello');
+});
+
 test('stripPrefix: unprefixed title returns unchanged', () => {
   assert.equal(stripPrefix('My App — Settings'), 'My App — Settings');
 });
@@ -133,22 +151,62 @@ test('status=complete: skipped when neither title change nor complete', () => {
   assert.equal(titleChanged || pageLoaded, false);
 });
 
-test('onChanged: updates tab title when portMappings changes', async () => {
+test('onChanged: updates title via portMappings in replace mode', async () => {
   lastInjectedTitle = null;
+  globalThis.document = { title: '⚡ 3001 — Node / API' };
+  const originalGet = globalThis.chrome.storage.sync.get;
+  globalThis.chrome.storage.sync.get = async () => ({ isEnabled: true, rewriteMode: 'replace' });
   await onChangedCallback(
     { portMappings: { oldValue: {}, newValue: { '3001': 'Payment API' } } },
     'sync'
   );
   assert.equal(lastInjectedTitle, '⚡ 3001 — Payment API');
+  globalThis.chrome.storage.sync.get = originalGet;
 });
 
-test('onChanged: reverts to default when custom override deleted', async () => {
+test('onChanged: in prefix mode keeps original bare title with new mapping', async () => {
   lastInjectedTitle = null;
+  globalThis.document = { title: '⚡ 3001 — Node / API' };
+  const originalGet = globalThis.chrome.storage.sync.get;
+  globalThis.chrome.storage.sync.get = async () => ({ isEnabled: true, rewriteMode: 'prefix' });
+  await onChangedCallback(
+    { portMappings: { oldValue: {}, newValue: { '3001': 'Payment API' } } },
+    'sync'
+  );
+  assert.equal(lastInjectedTitle, '⚡ 3001 — Node / API');
+  globalThis.chrome.storage.sync.get = originalGet;
+});
+test('onUpdated: in prefix mode adds only port prefix and keeps page title', async () => {
+  lastInjectedTitle = null;
+  globalThis.document = { title: 'My App' };
+  const originalGet = globalThis.chrome.storage.sync.get;
+  globalThis.chrome.storage.sync.get = async () => ({
+    isEnabled: true,
+    portMappings: {},
+    rewriteMode: 'prefix'
+  });
+
+  await onUpdatedCallback(
+    1,
+    { status: 'complete' },
+    { url: 'http://localhost:3000/', title: 'My App' }
+  );
+
+  assert.equal(lastInjectedTitle, '⚡ 3000 — My App');
+  globalThis.chrome.storage.sync.get = originalGet;
+});
+
+test('onChanged: in replace mode reverts to default name when custom override deleted', async () => {
+  lastInjectedTitle = null;
+  globalThis.document = { title: '⚡ 3001 — Payment API' };
+  const originalGet = globalThis.chrome.storage.sync.get;
+  globalThis.chrome.storage.sync.get = async () => ({ isEnabled: true, rewriteMode: 'replace' });
   await onChangedCallback(
     { portMappings: { oldValue: { '3001': 'Payment API' }, newValue: {} } },
     'sync'
   );
   assert.equal(lastInjectedTitle, '⚡ 3001 — Node / API');
+  globalThis.chrome.storage.sync.get = originalGet;
 });
 
 test('onChanged: ignores non-sync area', async () => {

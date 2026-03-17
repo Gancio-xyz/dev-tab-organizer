@@ -20,12 +20,15 @@ export function renderTabList(tabs, portMappings, rawPortMappings = {}) {
   const list = document.getElementById('tab-list');
   list.hidden = false;
 
-  const sorted = [...tabs]
-    .filter(tab => new URL(tab.url).port !== '')
-    .sort((a, b) => parseInt(new URL(a.url).port) - parseInt(new URL(b.url).port));
+  // One row per unique port: deduplicate by port so we never show duplicate menu items
+  // (e.g. multiple tabs on same port or duplicate query results)
+  const ports = [...new Set(
+    tabs
+      .map(tab => new URL(tab.url).port)
+      .filter(port => port !== '')
+  )].sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
-  list.innerHTML = sorted.map(tab => {
-    const port = new URL(tab.url).port;
+  list.innerHTML = ports.map(port => {
     const customName = rawPortMappings?.[port] ?? '';
     const defaultName = DEFAULT_PORT_MAP[port] ?? 'Port ' + port;
     return `
@@ -84,6 +87,33 @@ export function updateToggleUI(isEnabled) {
   btn.setAttribute('aria-pressed', String(!isEnabled));
 }
 
+function updateRewriteModeUI(mode) {
+  const checkbox = document.getElementById('rewrite-mode-toggle');
+  if (!checkbox) return;
+  checkbox.checked = mode === 'replace';
+}
+
+async function initRewriteMode() {
+  try {
+    const { rewriteMode = 'prefix' } = await chrome.storage.sync.get('rewriteMode');
+    updateRewriteModeUI(rewriteMode);
+
+    const checkbox = document.getElementById('rewrite-mode-toggle');
+    if (!checkbox) return;
+    checkbox.addEventListener('change', async () => {
+      try {
+        const nextMode = checkbox.checked ? 'replace' : 'prefix';
+        await chrome.storage.sync.set({ rewriteMode: nextMode });
+        updateRewriteModeUI(nextMode);
+      } catch (_) {
+        // silent — NFR9
+      }
+    });
+  } catch (_) {
+    // silent — NFR9
+  }
+}
+
 async function initToggle() {
   try {
     const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');
@@ -121,6 +151,7 @@ export async function init() {
     renderEmptyState();
   }
   initToggle();
+  initRewriteMode();
 }
 
 init();

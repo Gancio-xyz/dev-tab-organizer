@@ -34,7 +34,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-03-13
-last_updated: 2026-03-17 # updated 2026-03-17 (Added 3.5, 3.6, 3.7 bugs & 4.4 feature)
+last_updated: 2026-03-17 # updated 2026-03-17 (Stories 3.5, 3.6, 3.7 → done)
 project: dev-tab-organizer
 project_key: NOKEY
 tracking_system: file-system
@@ -62,9 +62,9 @@ development_status:
   3-2-implement-inline-name-editing-storage-persistence: done
   3-3-wire-storage-to-real-time-title-engine: done
   3-4-implement-global-pause-resume-toggle: done
-  3-5-bug-fix-duplicate-popup-items: ready-for-dev
-  3-6-bug-fix-tab-title-prefix-accumulation: ready-for-dev
-  3-7-bug-fix-initial-name-resolution: ready-for-dev
+  3-5-bug-fix-duplicate-popup-items: done
+  3-6-bug-fix-tab-title-prefix-accumulation: done
+  3-7-bug-fix-initial-name-resolution: done
   epic-3-retrospective: optional
 
   # Epic 4: Full Launch — v1.0 Release
