@@ -34,7 +34,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-03-13
-last_updated: 2026-03-17 # updated by code-review 2026-03-17 (3-1 → done; 4-2 → done)
+last_updated: 2026-03-17 # updated 2026-03-17 (2-2 → done)
 project: dev-tab-organizer
 project_key: NOKEY
 tracking_system: file-system
@@ -52,14 +52,15 @@ development_status:
   # Epic 2: Early Ship — v0.1 Launch
   epic-2: in-progress
   2-1-open-source-the-repository-on-github: done
-  2-2-submit-extension-to-chrome-web-store-v0-1: in-progress
+  2-2-submit-extension-to-chrome-web-store-v0-1: done
+  2-3-structure-extension-bundle-folder: ready-for-dev
   epic-2-retrospective: optional
 
   # Epic 3: Custom Mappings & Popup UI (Power User Customization)
   epic-3: in-progress
   3-1-render-base-popup-ui-empty-states: done
   3-2-implement-inline-name-editing-storage-persistence: done
-  3-3-wire-storage-to-real-time-title-engine: review
+  3-3-wire-storage-to-real-time-title-engine: done
   3-4-implement-global-pause-resume-toggle: ready-for-dev
   epic-3-retrospective: optional
 
