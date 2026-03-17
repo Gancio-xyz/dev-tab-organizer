@@ -19,7 +19,7 @@ globalThis.chrome = {
   }
 };
 
-const { applyMapping } = await import('../popup.js');
+const { applyMapping } = await import('../extension/popup.js');
 
 test('applyMapping sets new value for empty mappings', () => {
   const result = applyMapping({}, '3000', 'My App');

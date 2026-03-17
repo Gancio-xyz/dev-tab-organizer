@@ -38,8 +38,10 @@ Don't see your stack? Adding a new entry is one line in `port-map.js`.
 1. Clone this repository: `git clone git@github.com:Gancio-xyz/dev-tab-organizer.git`
 2. Open Chrome and navigate to `chrome://extensions`
 3. Enable **Developer mode** (toggle in the top-right corner)
-4. Click **Load unpacked** and select the cloned repository folder
+4. Click **Load unpacked** and select the `extension/` folder inside the cloned repository
 5. Open any `localhost:PORT` tab — the title updates immediately
+
+> **Note for contributors:** The `extension/` directory is the canonical runtime bundle. Keep `_bmad` and other tooling folders outside this bundle.
 
 ## License
 

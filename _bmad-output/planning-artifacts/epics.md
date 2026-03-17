@@ -195,6 +195,17 @@ So that any developer can install it in one click and the project gains real-wor
 **And** the extension passes Chrome Web Store automated review (no remote code execution, no broad host permissions beyond `localhost/*` and `127.0.0.1/*`),
 **And** the README placeholder Web Store link is updated with the live published URL.
 
+### Story 2.3: Structure Extension Bundle Folder for Chrome Packaging
+
+As the project maintainer,
+I want the extension’s runtime code isolated in a dedicated bundle folder,
+so that Chrome can load the extension unpacked and for Web Store packaging without `_bmad` and other tooling files interfering.
+
+**Acceptance Criteria:**
+- Given the repository is checked out fresh, when I open `chrome://extensions` and click “Load unpacked…”, then I can select a single `extension/` folder.
+- Tests pass cleanly when run via `node --test` with new locations.
+- Zipped package includes only runtime files and ignores `_bmad`, `tests`, etc.
+
 ## Epic 3: Custom Mappings & Popup UI (Power User Customization)
 
 A developer can click the extension icon to view their active localhost tabs, instantly rename a port mapping inline, toggle the global active/paused state, and have that custom configuration persist across browser sessions.

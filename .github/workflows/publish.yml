@@ -17,7 +17,7 @@ jobs:
       - name: Validate manifest version matches tag
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
-          MANIFEST_VERSION=$(python3 -c "import json; print(json.load(open('manifest.json'))['version'])")
+          MANIFEST_VERSION=$(python3 -c "import json; print(json.load(open('extension/manifest.json'))['version'])")
           if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
             echo "❌ Tag version ($TAG_VERSION) does not match manifest.json version ($MANIFEST_VERSION)"
             exit 1
@@ -26,19 +26,7 @@ jobs:
 
       - name: Zip extension
         run: |
-          zip -r extension.zip . \
-            -x "tests/*" \
-            -x ".github/*" \
-            -x "_bmad/*" \
-            -x "_bmad-output/*" \
-            -x ".cursor/*" \
-            -x ".agent/*" \
-            -x ".claude/*" \
-            -x ".git/*" \
-            -x "*.md" \
-            -x ".gitignore" \
-            -x ".DS_Store" \
-            -x "extension.zip"
+          cd extension && zip -r ../extension.zip .
 
       - name: Publish to Chrome Web Store
         uses: mnao305/chrome-extension-upload@v5.0.0

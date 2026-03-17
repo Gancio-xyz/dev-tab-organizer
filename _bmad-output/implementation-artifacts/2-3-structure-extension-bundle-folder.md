@@ -1,6 +1,6 @@
 # Story 2.3: Structure Extension Bundle Folder for Chrome Packaging
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -19,20 +19,20 @@ so that Chrome can load the extension unpacked and for Web Store packaging witho
 
 ## Tasks / Subtasks
 
-- [ ] Design target extension folder structure (AC: 1, 4)
-  - [ ] Decide canonical folder name (e.g., `extension/` or `chrome-extension/`) and document it
-  - [ ] Enumerate which files live inside the extension bundle (manifest, background, popup, icons, shared JS modules)
-- [ ] Move runtime files into dedicated extension folder (AC: 1, 4)
-  - [ ] Physically relocate `manifest.json`, `background.js`, `popup.html`, `popup.js`, `port-map.js`, and `icons/` (and any other manifest-referenced assets) under the new folder
-  - [ ] Update any relative imports within the extension code to match the new layout
-- [ ] Update tests and tooling references (AC: 2)
-  - [ ] Update `tests/*.test.js` imports to reference the new extension file paths (e.g., `../extension/background.js`)
-  - [ ] Run `node --test` and ensure all tests pass without modification to behavior
-- [ ] Update documentation and developer workflow (AC: 3, 4)
-  - [ ] Update `README.md` (and any relevant docs) to reference the new `Load unpacked` path and the extension folder layout
-  - [ ] Add a short note for contributors about keeping `_bmad` and other tooling folders outside the extension bundle
-  - [ ] Update `_bmad-output/planning-artifacts/architecture.md` Project Structure diagram to reflect the new `extension/` subfolder as the canonical runtime layout
-  - [ ] Add Story 2.3 entry to `_bmad-output/planning-artifacts/epics.md` under Epic 2 to keep the epics doc as the single source of truth
+- [x] Design target extension folder structure (AC: 1, 4)
+  - [x] Decide canonical folder name (e.g., `extension/` or `chrome-extension/`) and document it
+  - [x] Enumerate which files live inside the extension bundle (manifest, background, popup, icons, shared JS modules)
+- [x] Move runtime files into dedicated extension folder (AC: 1, 4)
+  - [x] Physically relocate `manifest.json`, `background.js`, `popup.html`, `popup.js`, `port-map.js`, and `icons/` (and any other manifest-referenced assets) under the new folder
+  - [x] Update any relative imports within the extension code to match the new layout
+- [x] Update tests and tooling references (AC: 2)
+  - [x] Update `tests/*.test.js` imports to reference the new extension file paths (e.g., `../extension/background.js`)
+  - [x] Run `node --test` and ensure all tests pass without modification to behavior
+- [x] Update documentation and developer workflow (AC: 3, 4)
+  - [x] Update `README.md` (and any relevant docs) to reference the new `Load unpacked` path and the extension folder layout
+  - [x] Add a short note for contributors about keeping `_bmad` and other tooling folders outside the extension bundle
+  - [x] Update `_bmad-output/planning-artifacts/architecture.md` Project Structure diagram to reflect the new `extension/` subfolder as the canonical runtime layout
+  - [x] Add Story 2.3 entry to `_bmad-output/planning-artifacts/epics.md` under Epic 2 to keep the epics doc as the single source of truth
 
 ## Dev Notes
 

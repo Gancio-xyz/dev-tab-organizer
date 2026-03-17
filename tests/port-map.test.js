@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DEFAULT_PORT_MAP } from '../port-map.js';
+import { DEFAULT_PORT_MAP } from '../extension/port-map.js';
 
 test('DEFAULT_PORT_MAP is exported correctly and is an object', () => {
   assert.ok(DEFAULT_PORT_MAP, 'DEFAULT_PORT_MAP should be exported');

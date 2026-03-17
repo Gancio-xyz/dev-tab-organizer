@@ -31,7 +31,7 @@ globalThis.chrome = {
   }
 };
 
-const { extractPort, buildTitle, stripPrefix } = await import('../background.js');
+const { extractPort, buildTitle, stripPrefix } = await import('../extension/background.js');
 
 test('extractPort: localhost URL with port', () => {
   assert.equal(extractPort('http://localhost:3000/'), '3000');

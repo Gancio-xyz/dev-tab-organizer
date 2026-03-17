@@ -384,19 +384,20 @@ dev-tab-organizer/
 ├── .github/
 │   └── workflows/
 │       └── publish.yml          # Tag-triggered: zip extension → Chrome Web Store Publish API
-├── icons/
-│   ├── icon-16.png              # Toolbar icon (16×16)
-│   ├── icon-48.png              # Extensions page icon (48×48)
-│   └── icon-128.png             # Chrome Web Store listing icon (128×128)
+├── extension/                   # Canonical runtime extension bundle
+│   ├── icons/
+│   │   ├── icon-16.png          # Toolbar icon (16×16)
+│   │   ├── icon-48.png          # Extensions page icon (48×48)
+│   │   └── icon-128.png         # Chrome Web Store listing icon (128×128)
+│   ├── manifest.json            # MV3 manifest — permissions, service worker, popup, icons
+│   ├── background.js            # Service worker — chrome.tabs.onUpdated listener + executeScript
+│   ├── port-map.js              # ES module — exports DEFAULT_PORT_MAP (port strings → names)
+│   ├── popup.html               # Popup skeleton — #tab-list, #empty-state, .tab-row structure
+│   └── popup.js                 # Popup logic — storage read/write, in-place DOM mutations
 ├── tests/
 │   ├── background.test.js       # Unit: title injection logic, guard check, port resolution
 │   ├── port-map.test.js         # Unit: DEFAULT_PORT_MAP exports, port-as-string keys
 │   └── popup.test.js            # Unit: render paths (active tabs vs. empty state), DOM updates
-├── manifest.json                # MV3 manifest — permissions, service worker, popup, icons
-├── background.js                # Service worker — chrome.tabs.onUpdated listener + executeScript
-├── port-map.js                  # ES module — exports DEFAULT_PORT_MAP (port strings → names)
-├── popup.html                   # Popup skeleton — #tab-list, #empty-state, .tab-row structure
-├── popup.js                     # Popup logic — storage read/write, in-place DOM mutations
 ├── .gitignore
 ├── CONTRIBUTING.md              # How to add default port mappings, submit PRs
 ├── LICENSE                      # MIT

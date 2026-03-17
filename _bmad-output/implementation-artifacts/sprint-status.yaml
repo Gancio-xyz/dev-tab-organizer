@@ -53,7 +53,7 @@ development_status:
   epic-2: in-progress
   2-1-open-source-the-repository-on-github: done
   2-2-submit-extension-to-chrome-web-store-v0-1: done
-  2-3-structure-extension-bundle-folder: ready-for-dev
+  2-3-structure-extension-bundle-folder: review
   epic-2-retrospective: optional
 
   # Epic 3: Custom Mappings & Popup UI (Power User Customization)
