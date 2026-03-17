@@ -78,6 +78,31 @@ export function attachEditListeners() {
   });
 }
 
+export function updateToggleUI(isEnabled) {
+  const btn = document.getElementById('toggle-btn');
+  btn.textContent = isEnabled ? 'Pause' : 'Resume';
+  btn.setAttribute('aria-pressed', String(!isEnabled));
+}
+
+async function initToggle() {
+  try {
+    const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');
+    updateToggleUI(isEnabled);
+    document.getElementById('toggle-btn').addEventListener('click', async () => {
+      try {
+        const { isEnabled: current = true } = await chrome.storage.sync.get('isEnabled');
+        const next = !current;
+        await chrome.storage.sync.set({ isEnabled: next });
+        updateToggleUI(next);
+      } catch (_) {
+        // silent — NFR9
+      }
+    });
+  } catch (_) {
+    // silent — NFR9; button defaults to "Pause" (isEnabled=true assumed)
+  }
+}
+
 export async function init() {
   try {
     const [tabs, storage] = await Promise.all([
@@ -95,6 +120,7 @@ export async function init() {
   } catch (_) {
     renderEmptyState();
   }
+  initToggle();
 }
 
 init();

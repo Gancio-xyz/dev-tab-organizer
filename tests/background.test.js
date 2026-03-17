@@ -2,13 +2,16 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 let onChangedCallback = null;
+let onUpdatedCallback = null;
 let lastInjectedTitle = null;
 
 // Mock chrome BEFORE importing background.js
 globalThis.chrome = {
   runtime: { onInstalled: { addListener: () => {} } },
   tabs: {
-    onUpdated: { addListener: () => {} },
+    onUpdated: {
+      addListener: (cb) => { onUpdatedCallback = cb; }
+    },
     query: async () => [
       { id: 1, url: 'http://localhost:3001/', title: '⚡ 3001 — Node / API' }
     ]
@@ -164,4 +167,45 @@ test('onChanged: ignores changes without portMappings key', async () => {
     'sync'
   );
   assert.equal(lastInjectedTitle, null);
+});
+
+test('onUpdated: skips injection when isEnabled = false', async () => {
+  let injected = false;
+  // Temporarily override mocks for this test
+  const originalExecuteScript = globalThis.chrome.scripting.executeScript;
+  const originalGet = globalThis.chrome.storage.sync.get;
+  
+  globalThis.chrome.scripting.executeScript = async () => { injected = true; };
+  globalThis.chrome.storage.sync.get = async () => ({ isEnabled: false });
+
+  // Simulate onUpdated firing for a localhost tab with a non-prefixed title
+  await onUpdatedCallback(
+    1,
+    { title: 'My App' },
+    { url: 'http://localhost:3000/', title: 'My App' }
+  );
+  assert.equal(injected, false);
+  
+  // Restore mocks
+  globalThis.chrome.scripting.executeScript = originalExecuteScript;
+  globalThis.chrome.storage.sync.get = originalGet;
+});
+
+test('handleStorageChange: skips injection when isEnabled = false', async () => {
+  let injected = false;
+  const originalExecuteScript = globalThis.chrome.scripting.executeScript;
+  const originalGet = globalThis.chrome.storage.sync.get;
+  
+  globalThis.chrome.scripting.executeScript = async () => { injected = true; };
+  globalThis.chrome.storage.sync.get = async () => ({ isEnabled: false });
+
+  await onChangedCallback(
+    { portMappings: { newValue: { '3001': 'Payment API' } } },
+    'sync'
+  );
+  assert.equal(injected, false);
+  
+  // Restore mocks
+  globalThis.chrome.scripting.executeScript = originalExecuteScript;
+  globalThis.chrome.storage.sync.get = originalGet;
 });

@@ -1,6 +1,6 @@
 # Story 3.4: Implement Global Pause/Resume Toggle
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -20,40 +20,40 @@ So that new tabs open during the session use native browser titles, while my set
 
 ## Tasks / Subtasks
 
-- [ ] Add `<button id="toggle-btn">` to `popup.html` (AC: 1)
-  - [ ] Add after `#empty-state` div, before the `<script>` tag
-  - [ ] Use: `<button id="toggle-btn" type="button" aria-pressed="false">Pause</button>`
-  - [ ] Add CSS for toggle button to `popup.css` (see Dev Notes for styles)
-- [ ] Implement toggle logic in `popup.js` (AC: 1)
-  - [ ] Add `updateToggleUI(isEnabled)` function — sets `textContent` and `aria-pressed` on `#toggle-btn`
-  - [ ] Add `initToggle()` async function — reads `isEnabled` from storage, calls `updateToggleUI`, attaches `click` listener
-  - [ ] In click listener: read current `isEnabled`, flip it, `chrome.storage.sync.set({ isEnabled: next })`, call `updateToggleUI(next)`
-  - [ ] Wrap click handler body in `try/catch` — silent fail per NFR9
-  - [ ] Call `initToggle()` from `init()` — ALWAYS call it, regardless of the tabs.length branch (toggle must show in both empty and populated state)
-- [ ] Add `isEnabled` guard to `onUpdated` handler in `background.js` (AC: 2, 3, 4)
-  - [ ] Add `const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');` inside the handler, after the existing `extractPort` check
-  - [ ] Add `if (!isEnabled) return;` immediately after the storage read
-  - [ ] Do NOT move or restructure any existing guard checks (`!changeInfo.title`, `startsWith('⚡')`, `!port`)
-- [ ] Add `isEnabled` guard to `handleStorageChange` in `background.js` (AC: 5)
-  - [ ] This function was added by Story 3.3 — add the check after the `area`/`portMappings` guards
-  - [ ] Add `const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');`
-  - [ ] Add `if (!isEnabled) return;` immediately after
-- [ ] Add unit tests in `tests/background.test.js` (AC: 2, 5)
-  - [ ] Extend chrome mock to return `{ isEnabled: false }` from `storage.sync.get` in relevant tests
-  - [ ] Test: `onUpdated` handler skips injection when `isEnabled = false`
-  - [ ] Test: `handleStorageChange` skips injection when `isEnabled = false`
-  - [ ] Run: `node --test tests/background.test.js` → zero failures
-- [ ] Add unit tests in `tests/popup.test.js` (AC: 1)
-  - [ ] Test: `updateToggleUI(true)` sets button text to "Pause" and `aria-pressed="false"`
-  - [ ] Test: `updateToggleUI(false)` sets button text to "Resume" and `aria-pressed="true"`
-  - [ ] Run: `node --test tests/popup.test.js` → zero failures
-- [ ] Manual verification (AC: 1, 2, 3, 4)
-  - [ ] Open popup → button shows "Pause" → click → button changes to "Resume"
-  - [ ] While paused: open a new `localhost:PORT` tab → title does NOT get `⚡` prefix
-  - [ ] Existing `⚡`-prefixed tabs retain their titles (no reversion) while paused
-  - [ ] Click "Resume" → open a new localhost tab → title gets `⚡` prefix again
-  - [ ] Close and reopen popup while paused → button still shows "Resume" (state persisted in storage)
-  - [ ] Inspect service worker console → no errors during any toggle action
+- [x] Add `<button id="toggle-btn">` to `popup.html` (AC: 1)
+  - [x] Add after `#empty-state` div, before the `<script>` tag
+  - [x] Use: `<button id="toggle-btn" type="button" aria-pressed="false">Pause</button>`
+  - [x] Add CSS for toggle button to `popup.css` (see Dev Notes for styles)
+- [x] Implement toggle logic in `popup.js` (AC: 1)
+  - [x] Add `updateToggleUI(isEnabled)` function — sets `textContent` and `aria-pressed` on `#toggle-btn`
+  - [x] Add `initToggle()` async function — reads `isEnabled` from storage, calls `updateToggleUI`, attaches `click` listener
+  - [x] In click listener: read current `isEnabled`, flip it, `chrome.storage.sync.set({ isEnabled: next })`, call `updateToggleUI(next)`
+  - [x] Wrap click handler body in `try/catch` — silent fail per NFR9
+  - [x] Call `initToggle()` from `init()` — ALWAYS call it, regardless of the tabs.length branch (toggle must show in both empty and populated state)
+- [x] Add `isEnabled` guard to `onUpdated` handler in `background.js` (AC: 2, 3, 4)
+  - [x] Add `const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');` inside the handler, after the existing `extractPort` check
+  - [x] Add `if (!isEnabled) return;` immediately after the storage read
+  - [x] Do NOT move or restructure any existing guard checks (`!changeInfo.title`, `startsWith('⚡')`, `!port`)
+- [x] Add `isEnabled` guard to `handleStorageChange` in `background.js` (AC: 5)
+  - [x] This function was added by Story 3.3 — add the check after the `area`/`portMappings` guards
+  - [x] Add `const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');`
+  - [x] Add `if (!isEnabled) return;` immediately after
+- [x] Add unit tests in `tests/background.test.js` (AC: 2, 5)
+  - [x] Extend chrome mock to return `{ isEnabled: false }` from `storage.sync.get` in relevant tests
+  - [x] Test: `onUpdated` handler skips injection when `isEnabled = false`
+  - [x] Test: `handleStorageChange` skips injection when `isEnabled = false`
+  - [x] Run: `node --test tests/background.test.js` → zero failures
+- [x] Add unit tests in `tests/popup.test.js` (AC: 1)
+  - [x] Test: `updateToggleUI(true)` sets button text to "Pause" and `aria-pressed="false"`
+  - [x] Test: `updateToggleUI(false)` sets button text to "Resume" and `aria-pressed="true"`
+  - [x] Run: `node --test tests/popup.test.js` → zero failures
+- [x] Manual verification (AC: 1, 2, 3, 4)
+  - [x] Open popup → button shows "Pause" → click → button changes to "Resume"
+  - [x] While paused: open a new `localhost:PORT` tab → title does NOT get `⚡` prefix
+  - [x] Existing `⚡`-prefixed tabs retain their titles (no reversion) while paused
+  - [x] Click "Resume" → open a new localhost tab → title gets `⚡` prefix again
+  - [x] Close and reopen popup while paused → button still shows "Resume" (state persisted in storage)
+  - [x] Inspect service worker console → no errors during any toggle action
 
 ## Dev Notes
 
@@ -408,15 +408,18 @@ Capture `onUpdatedCallback` the same way `onChangedCallback` is captured — by 
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+Antigravity (Gemini 2.5 Flash)
 
 ### Debug Log References
 
-_None yet_
+_None_
 
 ### Completion Notes List
 
-_To be filled by dev agent after implementation_
+✅ Implemented toggle button to pause/resume tab organizer
+✅ Added CSS styling for standard and paused states using `[aria-pressed]` 
+✅ Wrote failing tests & followed red-green-refactor TDD cycle
+✅ Tested guards gracefully skip modification while `isEnabled=false`
 
 ### File List
 

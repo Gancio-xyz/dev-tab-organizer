@@ -90,6 +90,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const port = extractPort(tab.url);
     if (!port) return;
 
+    // STORY 3.4: pause guard
+    const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');
+    if (!isEnabled) return;
+
     await chrome.scripting.executeScript({
       target: { tabId },
       func: (port) => {
@@ -113,6 +117,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 async function handleStorageChange(changes, area) {
   if (area !== 'sync') return;
   if (!changes.portMappings) return;
+
+  // STORY 3.4: pause guard
+  const { isEnabled = true } = await chrome.storage.sync.get('isEnabled');
+  if (!isEnabled) return;
 
   const newPortMappings = changes.portMappings.newValue ?? {};
 

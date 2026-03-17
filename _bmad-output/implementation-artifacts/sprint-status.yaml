@@ -61,7 +61,7 @@ development_status:
   3-1-render-base-popup-ui-empty-states: done
   3-2-implement-inline-name-editing-storage-persistence: done
   3-3-wire-storage-to-real-time-title-engine: done
-  3-4-implement-global-pause-resume-toggle: ready-for-dev
+  3-4-implement-global-pause-resume-toggle: review
   epic-3-retrospective: optional
 
   # Epic 4: Full Launch — v1.0 Release
