@@ -313,6 +313,30 @@ so that the extension provides immediate value from the default port map.
 - The resolution logic correctly accounts for both `DEFAULT_PORT_MAP` and any custom overrides in `chrome.storage.sync`.
 - SPA title updates also preserve/re-resolve the service name correctly.
 
+### Story 3.9: Dark Mode and Improve UI Layout
+
+As a developer using the extension in low-light or dark-themed environments,
+I want the popup to support dark mode and a clearer, more polished layout,
+So that the UI is comfortable to use and matches my system or preference without eye strain.
+
+**Acceptance Criteria:**
+
+**Given** the extension popup is open,
+**When** the user's system or browser uses a dark color scheme (prefers-color-scheme: dark),
+**Then** the popup renders with a dark theme (dark background, light text, sufficient contrast per WCAG 2.1 AA),
+**And** all interactive elements (inputs, buttons, toggle) remain keyboard-navigable and clearly visible.
+
+**Given** the user prefers dark mode regardless of system setting,
+**When** a theme preference is available (e.g. stored in chrome.storage or system-only),
+**Then** the popup respects that preference where implemented (e.g. follow system by default with optional override).
+
+**Given** the current popup layout,
+**When** this story is implemented,
+**Then** the overall layout is improved (e.g. clearer hierarchy, spacing, alignment, and visual grouping of tab list vs. controls),
+**And** the empty state, tab rows, pause toggle, and any secondary controls are consistently styled and easy to scan.
+
+*(PRD/Architecture: "Dark mode popup theming" — Post-MVP / future enhancement; NFR12–14 Accessibility: contrast and labelled inputs remain required.)*
+
 ## Epic 4: Full Launch — v1.0 Release
 
 The project is fully open-source with a contribution guide, automated CI/CD release pipeline, and an updated Chrome Web Store listing reflecting the complete v1.0 feature set.
