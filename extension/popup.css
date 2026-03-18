@@ -1,24 +1,51 @@
+/* Popup styles. Dark mode follows prefers-color-scheme only; no stored theme preference (Story 3.9). */
+
 body {
   min-width: 320px;
   max-width: 400px;
   padding: 12px;
   font-family: system-ui, sans-serif;
   margin: 0;
+  color: #333;
+  background: #fff;
 }
 
+/* ---- Layout: tab list block ---- */
+.popup-section--list {
+  margin-bottom: 0;
+}
+
+.popup-section--list:not(:empty) {
+  min-height: 60px;
+}
+
+/* ---- Layout: control block (clear separation from list) ---- */
+.popup-section--controls {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+/* ---- Empty state: same spacing/typography as list area ---- */
 #empty-state {
   padding: 16px 0;
   color: #666;
   font-size: 14px;
+  line-height: 1.4;
   text-align: center;
 }
 
+/* ---- Tab rows ---- */
 .tab-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  padding: 8px 0;
   border-bottom: 1px solid #eee;
+}
+
+.tab-row:last-child {
+  border-bottom: none;
 }
 
 .emoji-input {
@@ -30,11 +57,14 @@ body {
   font-size: 16px;
   text-align: center;
   flex-shrink: 0;
+  background: #fff;
+  color: #333;
 }
 
 .emoji-input:focus {
   outline: 2px solid #0066cc;
-  border-color: transparent;
+  outline-offset: 0;
+  border-color: #0066cc;
 }
 
 .tab-row label {
@@ -52,18 +82,23 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 13px;
+  background: #fff;
+  color: #333;
 }
 
 .tab-name-input:focus {
   outline: 2px solid #0066cc;
-  border-color: transparent;
+  outline-offset: 0;
+  border-color: #0066cc;
 }
 
+/* ---- Buttons ---- */
 #update-titles-btn {
   display: block;
   width: 100%;
-  margin-top: 8px;
-  padding: 6px 0;
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding: 8px 0;
   border: 1px solid #0066cc;
   border-radius: 4px;
   background: #e6f2ff;
@@ -84,11 +119,13 @@ body {
 #toggle-btn {
   display: block;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 0;
+  margin-bottom: 12px;
   padding: 8px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
   background: #f5f5f5;
+  color: #333;
   font-size: 13px;
   cursor: pointer;
 }
@@ -106,4 +143,125 @@ body {
   background: #fff3cd;
   border-color: #ffc107;
   color: #856404;
+}
+
+/* Rewrite-mode label and checkbox */
+.popup-section--controls label[for="rewrite-mode-toggle"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+#rewrite-mode-toggle {
+  width: 1em;
+  height: 1em;
+  accent-color: #0066cc;
+}
+
+#rewrite-mode-toggle:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* ========== Dark theme (system-only: prefers-color-scheme) ========== */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e0e0e0;
+    background: #1e1e1e;
+  }
+
+  .popup-section--controls {
+    border-top-color: #404040;
+  }
+
+  #empty-state {
+    color: #b0b0b0;
+  }
+
+  .tab-row {
+    border-bottom-color: #404040;
+  }
+
+  .emoji-input {
+    border-color: #505050;
+    background: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .emoji-input::placeholder {
+    color: #808080;
+  }
+
+  .emoji-input:focus {
+    outline-color: #6eb3ff;
+    border-color: #6eb3ff;
+  }
+
+  .tab-row label {
+    color: #e0e0e0;
+  }
+
+  .tab-name-input {
+    border-color: #505050;
+    background: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .tab-name-input::placeholder {
+    color: #808080;
+  }
+
+  .tab-name-input:focus {
+    outline-color: #6eb3ff;
+    border-color: #6eb3ff;
+  }
+
+  #update-titles-btn {
+    border-color: #4a8fea;
+    background: #1a3a5c;
+    color: #9ec8ff;
+  }
+
+  #update-titles-btn:hover {
+    background: #234a75;
+  }
+
+  #update-titles-btn:focus {
+    outline-color: #6eb3ff;
+  }
+
+  #toggle-btn {
+    border-color: #505050;
+    background: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  #toggle-btn:hover {
+    background: #383838;
+  }
+
+  #toggle-btn:focus {
+    outline-color: #6eb3ff;
+  }
+
+  #toggle-btn[aria-pressed="true"] {
+    background: #4a3a10;
+    border-color: #b8860b;
+    color: #f0d878;
+  }
+
+  .popup-section--controls label[for="rewrite-mode-toggle"] {
+    color: #e0e0e0;
+  }
+
+  #rewrite-mode-toggle {
+    accent-color: #6eb3ff;
+  }
+
+  #rewrite-mode-toggle:focus {
+    outline-color: #6eb3ff;
+  }
 }

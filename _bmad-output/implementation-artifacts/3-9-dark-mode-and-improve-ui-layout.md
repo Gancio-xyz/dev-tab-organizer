@@ -1,6 +1,6 @@
 # Story 3.9: Dark Mode and Improve UI Layout
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -20,16 +20,16 @@ So that the UI is comfortable to use and matches my system or preference without
 
 ## Tasks / Subtasks
 
-- [ ] Implement dark theme via CSS (AC #1)
-  - [ ] Use `prefers-color-scheme: dark` media query in `popup.css` to apply dark palette when system is dark.
-  - [ ] Ensure text/background contrast meets WCAG 2.1 AA (e.g. 4.5:1 for normal text; 3:1 for large text/UI components). Ensure focus rings are ≥3:1 against background in both themes.
-  - [ ] Style all controls: `.tab-row`, `.emoji-input`, `.tab-name-input`, `#toggle-btn`, `#update-titles-btn`, `#empty-state`, rewrite-mode label/checkbox. Do not remove or rename any existing DOM IDs/classes from Story 3.8.
-- [ ] System-only theme (AC #2)
-  - [ ] Document in Dev Notes / README or code comment: dark mode follows `prefers-color-scheme` only; no storage, no theme override in this story. Future theme control (if added) stays secondary to main popup task.
-- [ ] Improve UI layout (AC #3)
-  - [ ] Refine spacing and visual hierarchy in `popup.css`: tab list as one block; Pause / Update titles / Rewrite-mode as a second control block with clear separation (e.g. section spacing or divider). Empty state same spacing/typography as list area.
-  - [ ] Ensure empty state, tab rows, and controls look consistent in both light and dark themes.
-- [ ] Verify accessibility: focus rings (≥3:1), labels, and keyboard nav unchanged (NFR12–14).
+- [x] Implement dark theme via CSS (AC #1)
+  - [x] Use `prefers-color-scheme: dark` media query in `popup.css` to apply dark palette when system is dark.
+  - [x] Ensure text/background contrast meets WCAG 2.1 AA (e.g. 4.5:1 for normal text; 3:1 for large text/UI components). Ensure focus rings are ≥3:1 against background in both themes.
+  - [x] Style all controls: `.tab-row`, `.emoji-input`, `.tab-name-input`, `#toggle-btn`, `#update-titles-btn`, `#empty-state`, rewrite-mode label/checkbox. Do not remove or rename any existing DOM IDs/classes from Story 3.8.
+- [x] System-only theme (AC #2)
+  - [x] Document in Dev Notes / README or code comment: dark mode follows `prefers-color-scheme` only; no storage, no theme override in this story. Future theme control (if added) stays secondary to main popup task.
+- [x] Improve UI layout (AC #3)
+  - [x] Refine spacing and visual hierarchy in `popup.css`: tab list as one block; Pause / Update titles / Rewrite-mode as a second control block with clear separation (e.g. section spacing or divider). Empty state same spacing/typography as list area.
+  - [x] Ensure empty state, tab rows, and controls look consistent in both light and dark themes.
+- [x] Verify accessibility: focus rings (≥3:1), labels, and keyboard nav unchanged (NFR12–14).
 
 ## Dev Notes
 
@@ -77,8 +77,13 @@ So that the UI is comfortable to use and matches my system or preference without
 
 ### Completion Notes List
 
-—
+- Dark theme implemented via `@media (prefers-color-scheme: dark)` in `popup.css` with WCAG 2.1 AA–aligned contrast (e.g. #e0e0e0 on #1e1e1e, focus #6eb3ff). All controls styled in both themes; focus rings ≥3:1.
+- System-only theme documented in `popup.css` header comment, `popup.html` section comment, and README one-liner. No storage or theme preference.
+- Layout: two `<section>` wrappers in `popup.html` (`.popup-section--list`, `.popup-section--controls`) for clear hierarchy; control block has `border-top` and `padding-top` separation. Empty state uses same padding/typography as list area.
+- All existing DOM IDs/classes preserved; no changes to `popup.js`. All 58 tests pass.
 
 ### File List
 
-—
+- extension/popup.html (modified — layout sections)
+- extension/popup.css (modified — dark theme, layout hierarchy)
+- README.md (modified — theme note)

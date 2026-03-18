@@ -7,14 +7,20 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div id="tab-list" role="list" aria-label="Active localhost tabs" hidden></div>
-  <button id="update-titles-btn" type="button" hidden>Update titles</button>
-  <div id="empty-state" aria-live="polite" hidden></div>
-  <button id="toggle-btn" type="button" aria-pressed="false">Pause</button>
-  <label for="rewrite-mode-toggle">
-    <input id="rewrite-mode-toggle" type="checkbox" aria-label="Replace page titles entirely (port + name only) instead of prefixing">
-    Replace page titles instead of prefixing
-  </label>
+  <!-- Tab list block: list or empty state (one visible at a time). Theme follows prefers-color-scheme only; no stored preference (Story 3.9). -->
+  <section class="popup-section popup-section--list" aria-label="Tab list">
+    <div id="tab-list" role="list" aria-label="Active localhost tabs" hidden></div>
+    <div id="empty-state" aria-live="polite" hidden></div>
+  </section>
+  <!-- Control block: actions and rewrite-mode option -->
+  <section class="popup-section popup-section--controls" aria-label="Controls">
+    <button id="update-titles-btn" type="button" hidden>Update titles</button>
+    <button id="toggle-btn" type="button" aria-pressed="false">Pause</button>
+    <label for="rewrite-mode-toggle">
+      <input id="rewrite-mode-toggle" type="checkbox" aria-label="Replace page titles entirely (port + name only) instead of prefixing">
+      Replace page titles instead of prefixing
+    </label>
+  </section>
   <script src="popup.js" type="module"></script>
 </body>
 </html>

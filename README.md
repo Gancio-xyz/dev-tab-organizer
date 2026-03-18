@@ -42,6 +42,8 @@ Click the extension icon to open the popup:
 - **Clear a custom name** to revert to the default mapping
 - **Pause** the extension temporarily (e.g., during screen recordings) — existing titles are retained
 
+The popup follows your system/browser dark or light theme (`prefers-color-scheme`); no theme preference is stored.
+
 ## Load unpacked (local development)
 
 1. Clone this repository: `git clone git@github.com:Gancio-xyz/dev-tab-organizer.git`
