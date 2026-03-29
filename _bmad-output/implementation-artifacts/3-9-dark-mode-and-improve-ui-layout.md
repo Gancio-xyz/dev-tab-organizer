@@ -1,6 +1,6 @@
 # Story 3.9: Dark Mode and Improve UI Layout
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

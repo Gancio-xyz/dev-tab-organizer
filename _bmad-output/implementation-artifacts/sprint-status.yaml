@@ -34,7 +34,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-03-13
-last_updated: 2026-03-29 # updated 2026-03-29 (Story 3.8 → done)
+last_updated: 2026-03-29 # updated 2026-03-29 (Story 3.9 → done)
 project: dev-tab-organizer
 project_key: NOKEY
 tracking_system: file-system
@@ -66,7 +66,7 @@ development_status:
   3-6-bug-fix-tab-title-prefix-accumulation: done
   3-7-bug-fix-initial-name-resolution: done
   3-8-improve-popup-menu-with-icons: done
-  3-9-dark-mode-and-improve-ui-layout: review
+  3-9-dark-mode-and-improve-ui-layout: done
   epic-3-retrospective: optional
 
   # Epic 4: Full Launch — v1.0 Release
