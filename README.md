@@ -12,7 +12,7 @@ localhost tab title to include the port number and service name: `⚡ 3000 — R
 
 ## Install
 
-[Install from Chrome Web Store](#)
+[Install from Chrome Web Store](#) Not yet approved from Google - you can try it from local install.
 
 ## Default Port Map
 
@@ -36,7 +36,7 @@ Don't see your stack? Adding a new entry is one line in `port-map.js`.
 
 Click the extension icon to open the popup:
 
-![Popup UI showing custom port names and pause button](screenshot-popup-v1.png)
+![Popup UI showing custom port names and pause button](./assets/screenshot-popup-v1.0.0.png)
 
 - **Rename any port** by clicking its input and typing a custom name — saved automatically on blur or Enter
 - **Clear a custom name** to revert to the default mapping
