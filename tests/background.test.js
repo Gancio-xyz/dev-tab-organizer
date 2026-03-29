@@ -102,6 +102,11 @@ test('stripPrefix: unprefixed title returns unchanged', () => {
   assert.equal(stripPrefix('My App — Settings'), 'My App — Settings');
 });
 
+test('stripPrefix: does not strip legitimate titles that resemble prefixes', () => {
+  assert.equal(stripPrefix('News 2024 — Home'), 'News 2024 — Home');
+  assert.equal(stripPrefix('Beta 3000 — Docs'), 'Beta 3000 — Docs');
+});
+
 test('stripPrefix: empty string returns empty string', () => {
   assert.equal(stripPrefix(''), '');
 });

@@ -54,8 +54,8 @@ export function resolvePortEmoji(port, userMappings) {
   return getDefaultEmoji(port);
 }
 
-// Matches one or more "emoji port" prefixes (emoji 1–4 chars, e.g. ⚡ or 🚀) so we strip all and avoid accumulation.
-const PREFIX_REGEX = /^(?:[\s\S]{1,4}\s+\d+\s*(?:—\s*)?)+/;
+// Matches one or more "emoji port" prefixes (emoji 1–8 non-word chars, e.g. ⚡ or 🚀) so we strip all and avoid accumulation.
+const PREFIX_REGEX = /^(?:[^\w\s]{1,8}\s+\d+\s*(?:—\s*)?)+/u;
 
 export function stripPrefix(title) {
   if (!title || typeof title !== 'string') return title;
@@ -75,7 +75,7 @@ export function stripPrefix(title) {
  * @param {string} emoji - display emoji (default ⚡)
  */
 function applyTitleInPage(port, name, mode, emoji = '⚡') {
-  const prefixRegex = /^(?:[\s\S]{1,4}\s+\d+\s*(?:—\s*)?)+/;
+  const prefixRegex = /^(?:[^\w\s]{1,8}\s+\d+\s*(?:—\s*)?)+/u;
   const raw = document.title || '';
   const prefixed = prefixRegex.test(raw);
   const afterPrefix = prefixed ? raw.replace(prefixRegex, '').trim() : raw;

@@ -1,6 +1,6 @@
 # Story 3.8: Improve Popup Menu with Icons/Emojis
 
-Status: review
+Status: done
 
 ## Story
 
@@ -34,6 +34,9 @@ So that I can quickly identify my projects at a glance and customize them to my 
 - [x] Update `popup.html` / `popup.css` to make the emoji input field editable with only one emoji.
 - [x] Ensure `background.js` (or wherever title rewriting happens) doesn't break if the storage structure for `portMappings` changes.
 - [x] Ensure the tab title gets wrote consistently and it does not duplicate title, emojis or port numbers.
+
+### Review Follow-ups (AI)
+- [x] [AI-Review][Medium] Fix title stripping bug in background.js with PREFIX_REGEX using `[\s\S]`
 
 ## Dev Notes
 
