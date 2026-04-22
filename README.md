@@ -12,7 +12,7 @@ localhost tab title to include the port number and service name: `⚡ 3000 — R
 
 ## Install
 
-[Install from Chrome Web Store](#) Not yet approved from Google - you can try it from local install.
+[Install from Chrome Web Store](https://chromewebstore.google.com/detail/dev-tab-organizer/glkmlnnioclnnefcjpahcomlknngbcho)
 
 ## Default Port Map
 
